@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>협력업체 명함 관리 — CADDIS 레이저</title>
+<style>
+  :root {
+    --bg: #f0f2f5;
+    --surface: #ffffff;
+    --surface2: #f8f9fb;
+    --border: #e2e6ea;
+    --primary: #1a2744;
+    --accent: #c8102e;
+    --teal: #008080;
+    --text: #1a1a2e;
+    --text-sub: #5a6478;
+    --text-muted: #9aa3b0;
+    --tag-외주: #e8f4fd;       --tag-외주-t: #1565c0;
+    --tag-자재: #e8f5e9;       --tag-자재-t: #2e7d32;
+    --tag-AS: #fff3e0;         --tag-AS-t: #e65100;
+    --tag-소모품: #f3e5f5;     --tag-소모품-t: #6a1b9a;
+    --tag-장비: #fce4ec;       --tag-장비-t: #880e4f;
+    --shadow: 0 2px 8px rgba(0,0,0,.07);
+    --shadow-hover: 0 6px 20px rgba(0,0,0,.13);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  /* ── 헤더 ── */
+  header { background: var(--primary); padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; }
+  .h-left { display: flex; align-items: center; gap: 14px; }
+  .h-logo { width: 36px; height: 36px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 900; color: #fff; }
+  .h-title { color: #fff; font-size: 17px; font-weight: 700; }
+  .h-sub { color: #8899bb; font-size: 12px; margin-top: 2px; }
+  .h-right { display: flex; align-items: center; gap: 10px; }
+  .badge-count { background: rgba(255,255,255,.12); color: #ccd6f0; font-size: 12px; padding: 4px 12px; border-radius: 20px; }
+
+  /* ── 필터 바 ── */
+  .filter-bar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 14px 32px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .search-wrap { position: relative; flex: 1; min-width: 200px; max-width: 320px; }
+  .search-wrap input { width: 100%; padding: 8px 12px 8px 34px; border: 1px solid var(--border); border-radius: 8px; font-size: 13px; outline: none; background: var(--surface2); transition: border-color .15s; }
+  .search-wrap input:focus { border-color: var(--teal); }
+  .s-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 13px; }
+  .ftags { display: flex; gap: 7px; flex-wrap: wrap; }
+  .ftag { padding: 5px 13px; border-radius: 20px; border: 1.5px solid var(--border); background: var(--surface); font-size: 12px; font-weight: 600; cursor: pointer; color: var(--text-sub); transition: all .15s; }
+  .ftag:hover { border-color: var(--teal); color: var(--teal); }
+  .ftag.on { background: var(--teal); color: #fff; border-color: var(--teal); }
+  .ftag[data-c="외주"].on  { background: var(--tag-외주-t); border-color: var(--tag-외주-t); }
+  .ftag[data-c="자재"].on  { background: var(--tag-자재-t); border-color: var(--tag-자재-t); }
+  .ftag[data-c="AS"].on    { background: var(--tag-AS-t);   border-color: var(--tag-AS-t);   }
+  .ftag[data-c="소모품"].on { background: var(--tag-소모품-t); border-color: var(--tag-소모품-t); }
+  .ftag[data-c="장비"].on  { background: var(--tag-장비-t); border-color: var(--tag-장비-t); }
+
+  /* ── 그리드 ── */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 18px; padding: 28px 32px; }
+
+  /* ── 카드 ── */
+  .card { background: var(--surface); border-radius: 14px; border: 1px solid var(--border); box-shadow: var(--shadow); overflow: hidden; transition: box-shadow .2s, transform .15s; }
+  .card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+  .card-bar { height: 4px; }
+  .bar-외주  { background: var(--tag-외주-t); }
+  .bar-자재  { background: var(--tag-자재-t); }
+  .bar-AS    { background: var(--tag-AS-t);   }
+  .bar-소모품 { background: var(--tag-소모품-t); }
+  .bar-장비  { background: var(--tag-장비-t); }
+  .bar-      { background: var(--teal); }
+  .card-body { padding: 20px 22px 18px; }
+  .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
+  .card-co { font-size: 16px; font-weight: 800; color: var(--primary); line-height: 1.3; margin-bottom: 3px; }
+  .card-person { font-size: 13px; color: var(--text-sub); }
+  .card-code { font-size: 11.5px; color: var(--text-muted); margin-top: 2px; }
+  .card-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+  .tag { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 12px; }
+  .tag-외주  { background: var(--tag-외주);  color: var(--tag-외주-t); }
+  .tag-자재  { background: var(--tag-자재);  color: var(--tag-자재-t); }
+  .tag-AS    { background: var(--tag-AS);    color: var(--tag-AS-t);   }
+  .tag-소모품 { background: var(--tag-소모품); color: var(--tag-소모품-t); }
+  .tag-장비  { background: var(--tag-장비);  color: var(--tag-장비-t); }
+  .tag-주거래처 { background: #fff3cd; color: #856404; }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 14px 0; }
+  .info-list { display: flex; flex-direction: column; gap: 7px; }
+  .info-row { display: flex; align-items: flex-start; gap: 9px; font-size: 12.5px; }
+  .ii { width: 18px; flex-shrink: 0; color: var(--text-muted); text-align: center; margin-top: 1px; }
+  .iv { color: var(--text); line-height: 1.5; word-break: break-all; }
+  .iv a { color: var(--teal); text-decoration: none; }
+  .iv a:hover { text-decoration: underline; }
+  .memo-box { margin-top: 12px; background: var(--surface2); border-radius: 8px; padding: 10px 12px; font-size: 12px; color: var(--text-sub); line-height: 1.6; border-left: 3px solid var(--border); }
+  .memo-box.linked { border-left-color: var(--tag-외주-t); }
+  .xlsx-link { display: inline-flex; align-items: center; gap: 5px; margin-top: 8px; font-size: 11.5px; font-weight: 600; color: var(--tag-외주-t); text-decoration: none; background: var(--tag-외주); padding: 4px 10px; border-radius: 6px; }
+  .xlsx-link:hover { opacity: .8; }
+
+  /* ── 빈 상태 ── */
+  .empty { grid-column: 1/-1; text-align: center; padding: 60px 20px; color: var(--text-muted); }
+  .empty .icon { font-size: 40px; margin-bottom: 12px; }
+
+  /* ── 로딩 ── */
+  .loading { grid-column: 1/-1; text-align: center; padding: 60px; color: var(--text-muted); font-size: 14px; }
+
+  @media (max-width: 600px) {
+    header, .filter-bar { padding: 16px 18px; }
+    .grid { padding: 16px 18px; grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="h-left">
+    <div class="h-logo">C</div>
+    <div>
+      <div class="h-title">협력업체 명함 관리</div>
+      <div class="h-sub">CADDIS 레이저 — 거래처 통합 관리</div>
+    </div>
+  </div>
+  <div class="h-right">
+    <span class="badge-count" id="countBadge">로딩 중…</span>
+  </div>
+</header>
+
+<div class="filter-bar">
+  <div class="search-wrap">
+    <span class="s-icon">🔍</span>
+    <input id="searchInput" type="text" placeholder="업체명·담당자·전화 검색…" oninput="render()">
+  </div>
+  <div class="ftags">
+    <button class="ftag on" data-c="전체" onclick="setFilter('전체',this)">전체</button>
+    <button class="ftag" data-c="외주"  onclick="setFilter('외주',this)">외주</button>
+    <button class="ftag" data-c="자재"  onclick="setFilter('자재',this)">자재</button>
+    <button class="ftag" data-c="AS"    onclick="setFilter('AS',this)">A/S</button>
+    <button class="ftag" data-c="소모품" onclick="setFilter('소모품',this)">소모품</button>
+    <button class="ftag" data-c="장비"  onclick="setFilter('장비',this)">장비</button>
+  </div>
+</div>
+
+<div class="grid" id="grid">
+  <div class="loading">⏳ 업체 정보 불러오는 중…</div>
+</div>
+
+<script>
+let companies = [];
+let filterCat = '전체';
+
+// ── 데이터 로드 ──────────────────────────────────────────────
+async function loadData() {
+  try {
+    const res = await fetch('companies.json?t=' + Date.now());
+    companies = await res.json();
+    render();
+  } catch (e) {
+    document.getElementById('grid').innerHTML =
+      '<div class="empty"><div class="icon">⚠️</div><p>companies.json 로드 실패<br><small>' + e.message + '</small></p></div>';
+  }
+}
+
+// ── 필터 ────────────────────────────────────────────────────
+function setFilter(cat, btn) {
+  filterCat = cat;
+  document.querySelectorAll('.ftag').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  render();
+}
+
+// ── 렌더 ────────────────────────────────────────────────────
+function render() {
+  const q = (document.getElementById('searchInput').value || '').trim().toLowerCase();
+  const list = companies.filter(c => {
+    const matchCat = filterCat === '전체' || (c.cats || []).includes(filterCat);
+    const matchQ   = !q || [c.company, c.person, c.mobile, c.tel, c.email, c.specialty, c.addr]
+      .some(v => v && v.toLowerCase().includes(q));
+    return matchCat && matchQ;
+  });
+
+  document.getElementById('countBadge').textContent = `${list.length} / ${companies.length}개 업체`;
+
+  const grid = document.getElementById('grid');
+  if (list.length === 0) {
+    grid.innerHTML = '<div class="empty"><div class="icon">🏢</div><p>검색 결과가 없습니다</p></div>';
+    return;
+  }
+  grid.innerHTML = list.map(cardHTML).join('');
+}
+
+function cardHTML(c) {
+  const topCat = (c.cats && c.cats[0]) || '';
+  const tags = [
+    ...(c.cats || []).map(t => `<span class="tag tag-${t}">${t}</span>`),
+    c.primary ? `<span class="tag tag-주거래처">⭐ ${c.primary}</span>` : ''
+  ].filter(Boolean).join('');
+
+  const rows = [
+    c.mobile   && row('📱', `<a href="tel:${c.mobile}" onclick="sp(event)">${c.mobile}</a>`),
+    c.tel      && row('☎️', c.tel),
+    c.fax      && row('📠', c.fax),
+    c.email    && row('✉️', `<a href="mailto:${c.email}" onclick="sp(event)">${c.email}</a>`),
+    c.addr     && row('📍', c.addr),
+    c.specialty && row('⚙️', c.specialty),
+  ].filter(Boolean).join('');
+
+  const hasMemo = c.memo || c.xlsxlink;
+  const memoHTML = hasMemo ? `
+    <div class="memo-box${c.xlsxlink ? ' linked' : ''}">
+      ${c.memo || ''}
+      ${c.xlsxlink ? `<br><a class="xlsx-link" href="${c.xlsxlink}" target="_blank" onclick="sp(event)">📊 외주관리 xlsx →</a>` : ''}
+    </div>` : '';
+
+  return `
+  <div class="card">
+    <div class="card-bar bar-${topCat}"></div>
+    <div class="card-body">
+      <div class="card-top">
+        <div>
+          <div class="card-co">${c.company}</div>
+          ${c.person ? `<div class="card-person">${c.person}${c.position ? ` · <span style="color:var(--text-muted)">${c.position}</span>` : ''}</div>` : ''}
+          ${c.id ? `<div class="card-code">${c.id}</div>` : ''}
+        </div>
+        <div class="card-tags">${tags}</div>
+      </div>
+      <hr class="divider">
+      <div class="info-list">${rows}</div>
+      ${memoHTML}
+    </div>
+  </div>`;
+}
+
+function row(icon, val) {
+  return `<div class="info-row"><span class="ii">${icon}</span><span class="iv">${val}</span></div>`;
+}
+function sp(e) { e.stopPropagation(); }
+
+loadData();
+</script>
+</body>
+</html>
