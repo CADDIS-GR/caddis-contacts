@@ -3,6 +3,7 @@
 CADDIS 레이저 협력업체 명함을 GitHub Pages로 관리하는 아카이브.
 
 ---
+https://caddis-gr.github.io/caddis-contacts/
 
 ## 파일 구조
 
