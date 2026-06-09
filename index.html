@@ -21,6 +21,7 @@
     --tag-AS: #fff3e0;         --tag-AS-t: #e65100;
     --tag-소모품: #f3e5f5;     --tag-소모품-t: #6a1b9a;
     --tag-장비: #fce4ec;       --tag-장비-t: #880e4f;
+    --tag-내부: #e8eaf6;       --tag-내부-t: #283593;
     --shadow: 0 2px 8px rgba(0,0,0,.07);
     --shadow-hover: 0 6px 20px rgba(0,0,0,.13);
   }
@@ -51,6 +52,7 @@
   .ftag[data-c="AS"].on    { background: var(--tag-AS-t);   border-color: var(--tag-AS-t);   }
   .ftag[data-c="소모품"].on { background: var(--tag-소모품-t); border-color: var(--tag-소모품-t); }
   .ftag[data-c="장비"].on  { background: var(--tag-장비-t); border-color: var(--tag-장비-t); }
+  .ftag[data-c="내부"].on  { background: var(--tag-내부-t); border-color: var(--tag-내부-t); }
 
   /* ── 그리드 ── */
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 18px; padding: 28px 32px; }
@@ -64,6 +66,7 @@
   .bar-AS    { background: var(--tag-AS-t);   }
   .bar-소모품 { background: var(--tag-소모품-t); }
   .bar-장비  { background: var(--tag-장비-t); }
+  .bar-내부  { background: var(--tag-내부-t); }
   .bar-      { background: var(--teal); }
   .card-body { padding: 20px 22px 18px; }
   .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
@@ -77,6 +80,8 @@
   .tag-AS    { background: var(--tag-AS);    color: var(--tag-AS-t);   }
   .tag-소모품 { background: var(--tag-소모품); color: var(--tag-소모품-t); }
   .tag-장비  { background: var(--tag-장비);  color: var(--tag-장비-t); }
+  .tag-내부  { background: var(--tag-내부);  color: var(--tag-내부-t); }
+  .tag-자사  { background: #e3f2fd; color: #0d47a1; }
   .tag-주거래처 { background: #fff3cd; color: #856404; }
   .divider { border: none; border-top: 1px solid var(--border); margin: 14px 0; }
   .info-list { display: flex; flex-direction: column; gap: 7px; }
@@ -130,6 +135,7 @@
     <button class="ftag" data-c="AS"    onclick="setFilter('AS',this)">A/S</button>
     <button class="ftag" data-c="소모품" onclick="setFilter('소모품',this)">소모품</button>
     <button class="ftag" data-c="장비"  onclick="setFilter('장비',this)">장비</button>
+    <button class="ftag" data-c="내부"  onclick="setFilter('내부',this)">내부</button>
   </div>
 </div>
 

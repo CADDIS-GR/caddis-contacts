@@ -14,5 +14,21 @@
     "primary": "주거래처",
     "xlsxlink": "",
     "memo": "JOB-2026-006 (PO-202606-001), JOB-2026-007 (PO-202606-002) 발주완료. 각파이프 50×50×3.2T / 파이프홀 가공."
+  },
+  {
+    "id": "INT-001",
+    "company": "Joyul Industries (조율산업)",
+    "person": "김영봉",
+    "position": "총괄부장",
+    "mobile": "010-3750-8670",
+    "tel": "031-355-5147",
+    "fax": "031-355-5148",
+    "email": "joyul777@naver.com",
+    "addr": "Plant 1: 경기도 화성시 우정읍 매바위로 237번길 46-357 / Plant 2: 경기도 화성시 우정읍 쌍봉로 526 / Plant 3: 경기도 화성시 남양읍 남양로 200-7 / Plant 5: 경기도 화성시 우정읍 쌍봉로 634-83",
+    "specialty": "",
+    "cats": ["내부"],
+    "primary": "자사",
+    "xlsxlink": "",
+    "memo": "이메일 2개: joyul777@naver.com / kdmgcl2@naver.com. 화성시 공장 4개소 운영."
   }
 ]
