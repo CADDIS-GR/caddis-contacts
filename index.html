@@ -102,6 +102,18 @@
   /* ── 로딩 ── */
   .loading { grid-column: 1/-1; text-align: center; padding: 60px; color: var(--text-muted); font-size: 14px; }
 
+  /* ── 앵커 하이라이트 ── */
+  .card.highlighted {
+    box-shadow: 0 0 0 3px var(--teal), var(--shadow-hover);
+    transform: translateY(-2px);
+    animation: pulseHighlight 1.8s ease-out forwards;
+  }
+  @keyframes pulseHighlight {
+    0%   { box-shadow: 0 0 0 6px rgba(0,128,128,.5), var(--shadow-hover); }
+    60%  { box-shadow: 0 0 0 3px rgba(0,128,128,.3), var(--shadow-hover); }
+    100% { box-shadow: 0 0 0 2px rgba(0,128,128,.15), var(--shadow); }
+  }
+
   @media (max-width: 600px) {
     header, .filter-bar { padding: 16px 18px; }
     .grid { padding: 16px 18px; grid-template-columns: 1fr; }
@@ -153,6 +165,7 @@ async function loadData() {
     const res = await fetch('companies.json?t=' + Date.now());
     companies = await res.json();
     render();
+    handleAnchor();
   } catch (e) {
     document.getElementById('grid').innerHTML =
       '<div class="empty"><div class="icon">⚠️</div><p>companies.json 로드 실패<br><small>' + e.message + '</small></p></div>';
@@ -211,7 +224,7 @@ function cardHTML(c) {
     </div>` : '';
 
   return `
-  <div class="card">
+  <div class="card" id="card-${c.id}">
     <div class="card-bar bar-${topCat}"></div>
     <div class="card-body">
       <div class="card-top">
@@ -234,7 +247,21 @@ function row(icon, val) {
 }
 function sp(e) { e.stopPropagation(); }
 
+// ── 앵커 처리 (#V004 형식) ───────────────────────────────────
+function handleAnchor() {
+  const hash = location.hash.replace('#', '');
+  if (!hash) return;
+  const target = document.getElementById('card-' + hash);
+  if (!target) return;
+  setTimeout(() => {
+    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    target.classList.add('highlighted');
+    setTimeout(() => target.classList.remove('highlighted'), 2500);
+  }, 150);
+}
+
 loadData();
+window.addEventListener('hashchange', () => { render(); handleAnchor(); });
 </script>
 </body>
 </html>
