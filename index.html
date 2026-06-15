@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>협력업체 명함 관리 — CADDIS 레이저</title>
+
+<!-- PWA / 홈 화면 추가 -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="CADDIS 거래처">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+
 <style>
   :root {
     --bg: #f0f2f5;
@@ -159,7 +167,6 @@
 let companies = [];
 let filterCat = '전체';
 
-// ── 데이터 로드 ──────────────────────────────────────────────
 async function loadData() {
   try {
     const res = await fetch('companies.json?t=' + Date.now());
@@ -172,7 +179,6 @@ async function loadData() {
   }
 }
 
-// ── 필터 ────────────────────────────────────────────────────
 function setFilter(cat, btn) {
   filterCat = cat;
   document.querySelectorAll('.ftag').forEach(b => b.classList.remove('on'));
@@ -180,7 +186,6 @@ function setFilter(cat, btn) {
   render();
 }
 
-// ── 렌더 ────────────────────────────────────────────────────
 function render() {
   const q = (document.getElementById('searchInput').value || '').trim().toLowerCase();
   const list = companies.filter(c => {
@@ -208,11 +213,11 @@ function cardHTML(c) {
   ].filter(Boolean).join('');
 
   const rows = [
-    c.mobile   && row('📱', `<a href="tel:${c.mobile}" onclick="sp(event)">${c.mobile}</a>`),
-    c.tel      && row('☎️', c.tel),
-    c.fax      && row('📠', c.fax),
-    c.email    && row('✉️', `<a href="mailto:${c.email}" onclick="sp(event)">${c.email}</a>`),
-    c.addr     && row('📍', c.addr),
+    c.mobile    && row('📱', `<a href="tel:${c.mobile}" onclick="sp(event)">${c.mobile}</a>`),
+    c.tel       && row('☎️', c.tel),
+    c.fax       && row('📠', c.fax),
+    c.email     && row('✉️', `<a href="mailto:${c.email}" onclick="sp(event)">${c.email}</a>`),
+    c.addr      && row('📍', c.addr),
     c.specialty && row('⚙️', c.specialty),
   ].filter(Boolean).join('');
 
@@ -247,7 +252,6 @@ function row(icon, val) {
 }
 function sp(e) { e.stopPropagation(); }
 
-// ── 앵커 처리 (#V004 형식) ───────────────────────────────────
 function handleAnchor() {
   const hash = location.hash.replace('#', '');
   if (!hash) return;
