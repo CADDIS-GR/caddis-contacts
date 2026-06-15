@@ -1,0 +1,20 @@
+{
+  "name": "CADDIS 협력업체 명함",
+  "short_name": "CADDIS 거래처",
+  "start_url": "/caddis-contacts/",
+  "display": "standalone",
+  "background_color": "#0d1b2a",
+  "theme_color": "#0d1b2a",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}
