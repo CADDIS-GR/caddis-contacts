@@ -30,5 +30,21 @@
     "primary": "자사",
     "xlsxlink": "",
     "memo": "이메일 2개: joyul777@naver.com / kdmgcl2@naver.com. 화성시 공장 4개소 운영."
+  },
+  {
+    "id": "G001",
+    "company": "금강종합가스",
+    "person": "전준형",
+    "position": "대표",
+    "mobile": "010-3158-7736",
+    "tel": "031-366-7719",
+    "fax": "031-366-7729 / MobileFAX 0504-099-7736",
+    "email": "kmg7729@naver.com",
+    "addr": "경기도 화성시 마도면 마도로 575 (청원리 52번지)",
+    "specialty": "산업용·반도체용·식음료용·독성가스 판매허가업체",
+    "cats": ["소모품"],
+    "primary": "",
+    "xlsxlink": "",
+    "memo": "레이저 절단 가스 공급 업체. 질소·산소 공급 예정."
   }
 ]
