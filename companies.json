@@ -78,5 +78,21 @@
     "primary": "",
     "xlsxlink": "",
     "memo": "공장: 경기도 화성시 마도면 마로도 550. 홈페이지: http://hjcomp.com. ByCut Nova 설치 대비 압축공기 공급 검토 업체."
+  },
+  {
+    "id": "E002",
+    "company": "바이스트로닉코리아㈜",
+    "person": "이종호",
+    "position": "Software Team / 차장",
+    "mobile": "010-4137-7525",
+    "tel": "051-325-5701",
+    "fax": "051-319-4144",
+    "email": "Jongho.lee@bystronic.com",
+    "addr": "22013 인천광역시 연수구 인천타워대로 77 (송도동)",
+    "specialty": "레이저 절단기 제조·판매·AS (Bystronic)",
+    "cats": ["장비"],
+    "primary": "",
+    "xlsxlink": "",
+    "memo": "ByCut Nova 3015 6kW 납품사. Software Team 담당자. 홈페이지: www.bystronic.com"
   }
 ]
