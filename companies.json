@@ -64,6 +64,22 @@
     "memo": "실무 담당자. G001 전준형 대표와 동일 업체."
   },
   {
+    "id": "M001",
+    "company": "가나종합철강(주)",
+    "person": "최다정",
+    "position": "과장",
+    "mobile": "010-2912-6009",
+    "tel": "031-498-2217",
+    "fax": "031-433-2218",
+    "email": "kanasteel68@naver.com",
+    "addr": "경기도 시흥시 공단3대로 337 시화공단 3바 1011호",
+    "specialty": "철강재 유통 (KANA Synthesis Steel Co., Ltd.)",
+    "cats": ["자재"],
+    "primary": "",
+    "xlsxlink": "",
+    "memo": "시화공단 소재 철강 유통업체. 영문명: KANA Synthesis Steel Co., Ltd."
+  },
+  {
     "id": "E001",
     "company": "(주)협진콤프레사",
     "person": "윤여정",
@@ -94,5 +110,21 @@
     "primary": "",
     "xlsxlink": "",
     "memo": "ByCut Nova 3015 6kW 납품사. Software Team 담당자. 홈페이지: www.bystronic.com"
+  },
+  {
+    "id": "E003",
+    "company": "보더레이저코리아",
+    "person": "권혁",
+    "position": "대표이사",
+    "mobile": "010-9443-0208",
+    "tel": "",
+    "fax": "",
+    "email": "kwon.hyuk@bodor.com",
+    "addr": "본사: 경기도 안양시 동안구 흥안대로 427번길 50 1층 / 지사: 경남 김해시 번화1로 82 옥스포드빌딩 902호",
+    "specialty": "파이버 레이저 절단기 판매·AS (Bodor Laser)",
+    "cats": ["장비"],
+    "primary": "",
+    "xlsxlink": "",
+    "memo": "파이프 레이저 도입 검토 후보. Bodor SK2-65 iLoader2-65 견적 진행. 홈페이지: www.bodor.com"
   }
 ]
