@@ -126,5 +126,21 @@
     "primary": "",
     "xlsxlink": "",
     "memo": "파이프 레이저 도입 검토 후보. Bodor SK2-65 iLoader2-65 견적 진행. 홈페이지: www.bodor.com"
+  },
+  {
+    "id": "E004",
+    "company": "SMT DNE LASER KOREA",
+    "person": "서성국",
+    "position": "레이저사업부/대표",
+    "mobile": "010-4573-7809",
+    "tel": "051-918-7809",
+    "fax": "051-918-7810",
+    "email": "s.k.seo@hotmail.com",
+    "addr": "부산광역시 강서구 과학산단1로60번길 31, #5-307",
+    "specialty": "Bystronic Tube Agent / DNE LASER Exclusive Agent (파이프·튜브 및 파이버 레이저)",
+    "cats": ["장비", "AS"],
+    "primary": "",
+    "xlsxlink": "",
+    "memo": "Bystronic Tube Agent, DNE LASER 공식 대리점. 서비스센터: 경기·중부·경북·경남·호남지점 운영."
   }
 ]
